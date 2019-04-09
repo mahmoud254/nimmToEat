@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Rails nimmToEat-Backend-server: production" uuid="2303d585-16e7-4cd4-8015-34d41cc8c85a">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/nimmToEat_production</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails nimmToEat-Backend-server: test" uuid="9eddcc8a-92c4-43a1-aeb9-926886dfd551">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/nimmToEat_test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails nimmToEat-Backend-server: development" uuid="c14f1157-35bf-49f7-af41-c4e811ce60f9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/nimmToEat_development</jdbc-url>
+    </data-source>
+  </component>
+</project>
