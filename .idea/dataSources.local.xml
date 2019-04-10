@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails nimmToEat-Backend-server: production" uuid="2303d585-16e7-4cd4-8015-34d41cc8c85a">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <user-name>rubyuser</user-name>
+    </data-source>
+    <data-source name="Rails nimmToEat-Backend-server: test" uuid="9eddcc8a-92c4-43a1-aeb9-926886dfd551">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <user-name>rubyuser</user-name>
+    </data-source>
+    <data-source name="Rails nimmToEat-Backend-server: development" uuid="c14f1157-35bf-49f7-af41-c4e811ce60f9">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <user-name>rubyuser</user-name>
+    </data-source>
+  </component>
+</project>
