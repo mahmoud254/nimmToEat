@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
     def list_groups
     
 
-        @groups_name= Group.where("creator_id = ?",params[:id]).select("name")
+        @groups_name= Group.where("creator_id = ?",params[:id]).select("id , name" )
         
         render :json => @groups_name
        
