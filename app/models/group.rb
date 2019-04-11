@@ -1,7 +1,7 @@
 class Group < ApplicationRecord
-
-    belongs_to :user
-    has_many :users, dependent: :destroy
+     validates :name, uniqueness: true
+     belongs_to :user ,:foreign_key => "creator_id"
+    # has_many :users, dependent: :destroy
 
 end
 
