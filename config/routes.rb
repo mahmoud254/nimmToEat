@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   post "/friends/:id/delete", to:'friends#delete_friends'
 
   post "/groups", to:'groups#create_group'
-  get "/groups/:id", to:'groups#list_groups'
+  get "/groups/users/:id", to:'groups#list_groups'
   get "/groups/:id/delete", to:'groups#delete_groups'
   post "/groups/:id/addmember" ,to:'groups#add_member'
-  post "/groups/:id" ,to:'groups#list_members'
+  get "/groups/:id" ,to:'groups#list_members'
   post "/groups/members/:id/delete",to:"groups#delete_members"
 
 end
