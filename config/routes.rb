@@ -14,7 +14,13 @@ Rails.application.routes.draw do
   get "/groups/:id/delete", to:'groups#delete_groups'
   post "/groups/:id/addmember" ,to:'groups#add_member'
   get "/groups/:id" ,to:'groups#list_members'
-  post "/groups/members/:id/delete",to:"groups#delete_members"
+  post "/groups/members/:id/delete",to:'groups#delete_members'
+
+  post "/orders", to:'orders#add_order'
+  post "/users/:id/getfriend" ,to:'orders#get_friends'
+  post "/users/:id/getmember",to:'orders#get_members'
+  
+
 
 end
 

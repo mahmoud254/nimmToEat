@@ -39,13 +39,19 @@ class GroupsController < ApplicationController
         request_body= JSON.parse(request.raw_post)
         @userId = User.where("email = ?",request_body["email"]).select("id")
         if @userId.present? 
-        groupmember = Groupmember.new(:group_id =>params[:id],:member_id => @userId[0]["id"].to_i)
-        if groupmember.save
-        render :json => { :status => :ok, :message => "Success!", :html => "...insert html...", :data => request_body }
-        else
-            return nil   
-        end  
-    else
+          @friends = Friendship.where("user_id = ? AND friend_id = ?",request_body["user_id"],@userId[0]["id"].to_i)
+          if @friends.present?
+            groupmember = Groupmember.new(:group_id =>params[:id],:member_id => @userId[0]["id"].to_i)
+            if groupmember.save
+            render :json => { :status => :ok, :message => "Success!", :html => "...insert html...", :data => request_body }
+            else
+                return nil   
+            end  
+          else
+            render :json =>{:message => "msh friends asln"}
+            #return nil
+            end
+       else
             return nil
         #render :json => { :status => :ok, :message => "Success!", :html => "...insert html..." }
         end

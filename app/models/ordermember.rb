@@ -1,0 +1,3 @@
+class Ordermember < ApplicationRecord
+    
+end
