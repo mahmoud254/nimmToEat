@@ -21,6 +21,19 @@ class GroupsController < ApplicationController
        
     end
 
+    def delete_groups
+        
+           @delete_record =Group.where("id = ? ",params[:id])
+           if  @delete_record.present?
+            if @delete_record[0].destroy
+            render :json =>  {:message => "done"}
+            else        
+                return nil 
+        end
+    end
+
+        end
+
     def add_member
     
         request_body= JSON.parse(request.raw_post)

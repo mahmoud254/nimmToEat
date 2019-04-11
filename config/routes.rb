@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   post "/groups", to:'groups#create_group'
   get "/groups/:id", to:'groups#list_groups'
+  get "/groups/:id/delete", to:'groups#delete_groups'
   post "/groups/:id/addmember" ,to:'groups#add_member'
   post "/groups/:id" ,to:'groups#list_members'
   post "/groups/members/:id/delete",to:"groups#delete_members"
