@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 2019_04_11_170734) do
   end
 
   create_table "ordermembers", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "member_id"
+    t.string "invitation_status", default: "invited"
+    t.string "item"
+    t.integer "amount"
+    t.float "price"
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

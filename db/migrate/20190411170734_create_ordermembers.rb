@@ -3,7 +3,7 @@ class CreateOrdermembers < ActiveRecord::Migration[5.2]
     create_table :ordermembers do |t|
       t.integer :order_id
       t.integer :member_id
-      t.string , default: 'invited' :invitation_status
+      t.string  :invitation_status , default: 'invited' 
       t.string  :item
       t.integer :amount
       t.float   :price

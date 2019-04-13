@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
         @friends = Friendship.where("user_id = ? AND friend_id = ?",params[:id],@user_data[0]["id"].to_i)
          if @friends.present?
            
-            render :json => @user_data
+            render :json => @user_data[0]
 
          else
             #render :json => {:message => "msh friends" }
