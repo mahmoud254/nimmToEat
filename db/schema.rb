@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_170734) do
+ActiveRecord::Schema.define(version: 2019_04_11_170766) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(version: 2019_04_11_170734) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.integer "member_id"
+    t.string "invitation_status", default: "invited"
+    t.string "item"
+    t.integer "amount"
+    t.float "price"
+    t.string "comment"
   end
 
   create_table "orders", force: :cascade do |t|

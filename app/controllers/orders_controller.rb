@@ -44,22 +44,27 @@ class OrdersController < ApplicationController
     def add_order
         request_body = JSON.parse(request.raw_post)
         new_order = Order.new(:meal => request_body["meal"],:restaurant_name =>request_body["restaurant_name"],
-                               :menu_image=>request_body["menu_image"],:status =>request_body["status"],:creator_id=>request_body["creator_id"])
-
-        if new_order.save
-            request_body["ordermembers"].each do |t|
-                new_member = Ordermember.new(:order_id => new_order["id"].to_i,:member_id=>t["id"])
-                if new_member.save
+                               :menu_image=>request_body["menu_image"],:status =>request_body["status"],:creator_id=>request_body["creator_id"].to_i)
+ 
+         if new_order.save
+          
+            @order_members = request_body["ordermembers"]
+           
+            @order_members["id"].each do |t|
+                
+                new_member = Ordermember.new(:order_id => new_order["id"].to_i,:member_id=>t)
+                new_member.save
+            end
+            
                     render:json =>{:message => "done" }
-                else
-                    render:json =>{:message => "nonsave members" }
+            
+                    # render:json =>{:message => "nonsave members" }
                     #return nil
-                end
-            end  
+             
 
-        else
-            render:json =>{:message => "nonsave order" }
-            #return nil
+       else
+           render:json =>{:message => "nonsave order" }
+            return nil
         end                      
 
             
