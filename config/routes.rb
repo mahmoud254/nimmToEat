@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post "/users/:id/getmembers",to:'orders#get_members'
 
   post "/orders/show",to:'orders#show_orders'
+
   
 
 

@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
         @friends = Friendship.where("user_id = ? AND friend_id = ?",params[:id],@user_data[0]["id"].to_i)
          if @friends.present?
            
-            render :json => @user_data
+            render :json => @user_data[0]
 
          else
             #render :json => {:message => "msh friends" }
@@ -51,9 +51,9 @@ class OrdersController < ApplicationController
           
             @order_members = request_body["ordermembers"]
            
-            @order_members["id"].each do |t|
+            @order_members.each do |t|
                 
-                new_member = Ordermember.new(:order_id => new_order["id"].to_i,:member_id=>t)
+                new_member = Ordermember.new(:order_id => new_order["id"].to_i,:member_id=>t["id"])
                 new_member.save
             end
             
