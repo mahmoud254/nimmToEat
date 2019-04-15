@@ -34,5 +34,8 @@ Rails.application.routes.draw do
   post "/orders/:id/joinedfriends" ,to:'orders#get_joined_friends' #takes {"user_id":2}
   post "/orders/:id/joinedfriendscount" ,to:'orders#get_joined_friends_count' #takes {"user_id":2}
 
+
+  post "/orders/:id/add_item" ,to:'orders#add_order_item' #takes {"user_id":2}
+
 end
 

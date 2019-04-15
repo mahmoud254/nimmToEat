@@ -111,34 +111,54 @@ class OrdersController < ApplicationController
              render :json => @order_details
     end
 
+
     def get_order_details
       @order = Order.where("id = ?",params[:id])
       render :json => @order
     end
+
 
     def invited_friends
       request_body = JSON.parse(request.raw_post)
       @invited_members  = Ordermember.where("order_id = ?",params[:id]).pluck(:member_id)
       @invited_friends = Friendship.where(user_id: request_body["user_id"]).where(friend_id: @invited_members)
     end
+
     def get_invited_friends
       render :json => invited_friends
     end
+
     def get_invited_friends_count
       render :json => invited_friends.count
     end
+
 
     def joined_friends
       request_body = JSON.parse(request.raw_post)
       @invited_members  = Ordermember.where("order_id = ?",params[:id]).where(invitation_status:"accepted").pluck(:member_id)
       @invited_friends = Friendship.where(user_id: request_body["user_id"]).where(friend_id: @invited_members)
     end
+
     def get_joined_friends
       render :json => joined_friends
     end
 
     def get_joined_friends_count
       render :json => joined_friends.count
+    end
+
+    def add_order_item
+      request_body = JSON.parse(request.raw_post)
+      new_order_member_item = Ordermember.new(:order_id => params[:id],:member_id =>request_body["member_id"],
+                            :invitation_status=>"accepted",:item =>request_body["item"],:amount=>request_body["amount"],:price=>request_body["price"],:comment=>request_body["comment"].to_i)
+      if new_order_member_item.save
+        render :json =>{:message => "done" }
+      else
+        render :json =>{:message => "nonsave order_item" }
+        return nil
+      end
+
+
     end
 
 
