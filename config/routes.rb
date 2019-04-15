@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   #get order details
   get "/orders/:id", to:'orders#get_order_details'
 
+  post "/orders/:id/invitedfriends" ,to:'orders#get_invited_friends' #takes {"user_id":2}
+  post "/orders/:id/invitedfriendscount" ,to:'orders#get_invited_friends_count' #takes {"user_id":2}
+
 
 
 end
