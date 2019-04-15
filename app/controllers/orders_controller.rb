@@ -1,3 +1,4 @@
+require('json')
 class OrdersController < ApplicationController
 
     def get_friends
@@ -70,6 +71,45 @@ class OrdersController < ApplicationController
 
     end
 
+    def show_orders
+
+        request_body = JSON.parse(request.raw_post)
+        @order_details=[]
+        @orders = Order.select("id,meal,restaurant_name,status,creator_id")
+        @member_status=Ordermember.group(["order_id","invitation_status"]).count('invitation_status')
+        
+        @order_invited =nil
+        @order_joined =nil
+        @creator_status =nil
+         #@orderDe=Order.joins(:ordermember).select("orders.id,meal,restaurant_name,status,invitation_status")#.group("order_id","invitation_status").where('orders.id = order_id').count('invitation_status')
+        # render :json =>@member_status
+          @orders.each do |t|
+             if t["creator_id"]==request_body["user_id"].to_i
+                @creator_status=true
+             else
+                @creator_status=false
+             end
+
+            @member_status.each do |key,value|
+
+                if t["id"]==key[0]
+
+                    if key[1]=="invited"
+                    @order_invited=value
+                    
+                    else
+                        @order_joined =value
+                        end
+                
+                end
+
+            end
+             
+              @order_details <<{:id=>t["id"],:meal=>t["meal"],:restaurant=>t["restaurant_name"],:invited=>@order_invited,:joined=>@order_joined,:status=>t["status"],:creator_id=>@creator_status} 
+       
+            end
+             render :json => @order_details
+    end
 
     def get_order_details
       @order = Order.where("id = ?",params[:id])
@@ -100,4 +140,6 @@ class OrdersController < ApplicationController
     def get_joined_friends_count
       render :json => joined_friends.count
     end
+
+
 end
