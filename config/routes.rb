@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post "/users/forgot", to: 'users#forgot'
 
   post "/friends", to:'friends#create'
+  post "/friends/activity" , to: 'friends#get_friends_activity' #takes {user_id:2}
   get  "/friends/:id", to:'friends#list_friends'
   post "/friends/:id/delete", to:'friends#delete_friends'
 
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
 
 
   #################### new commits for order page####################
+  #
+  get "/orders/latest" , to:'orders#get_latest_orders'
   #get order details
   get "/orders/:id", to:'orders#get_order_details'
 
@@ -36,6 +39,9 @@ Rails.application.routes.draw do
 
 
   post "/orders/:id/add_item" ,to:'orders#add_order_item' #takes {"user_id":2}
+
+
+
 
 end
 

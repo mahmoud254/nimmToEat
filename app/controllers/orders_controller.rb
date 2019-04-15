@@ -157,9 +157,11 @@ class OrdersController < ApplicationController
         render :json =>{:message => "nonsave order_item" }
         return nil
       end
-
-
     end
 
+    def get_latest_orders
+      latest_orders = Order.select(:meal, :created_at).last(2)
+      render :json => latest_orders
+    end
 
 end
