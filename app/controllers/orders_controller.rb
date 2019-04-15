@@ -88,5 +88,16 @@ class OrdersController < ApplicationController
       render :json => invited_friends.count
     end
 
+    def joined_friends
+      request_body = JSON.parse(request.raw_post)
+      @invited_members  = Ordermember.where("order_id = ?",params[:id]).where(invitation_status:"accepted").pluck(:member_id)
+      @invited_friends = Friendship.where(user_id: request_body["user_id"]).where(friend_id: @invited_members)
+    end
+    def get_joined_friends
+      render :json => joined_friends
+    end
 
+    def get_joined_friends_count
+      render :json => joined_friends.count
+    end
 end
