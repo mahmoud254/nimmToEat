@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post "/users/login", to: 'users#login'
   post "/users/signup", to: 'users#signup'
   post "/users/forgot", to: 'users#forgot'
+  get "/users/:id/getimage" , to: 'users#get_user_image'
 
   post "/friends", to: 'friends#create'
   post "/friends/activity", to: 'friends#get_friends_activity' #takes {user_id:2}

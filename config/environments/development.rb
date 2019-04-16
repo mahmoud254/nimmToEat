@@ -58,7 +58,9 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
+  if Rack::Utils.respond_to?("key_space_limit=")
+    Rack::Utils.key_space_limit = 262144555555 
+  end
   config.action_mailer.delivery_method = :smtp
 config.action_mailer.raise_delivery_errors = true
 config.action_mailer.default_options = {from: 'nahm.reads@gmail.com'}
