@@ -113,8 +113,12 @@ class OrdersController < ApplicationController
 
 
     def get_order_details
-      @order = Order.where("id = ?",params[:id])
-      render :json => @order
+      @ordermembers = Ordermember.where("order_id = ?",params[:id]).select(:member_id, :item, :amount, :price, :comment)
+      @orderdetails = Array.new
+      @ordermembers.each do |od|
+        @orderdetails << [ User.where(:id => od.member_id).select(:name), @ordermembers ]
+      end
+      render :json => @orderdetails
     end
 
 
