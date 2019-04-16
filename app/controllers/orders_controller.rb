@@ -141,8 +141,10 @@ class OrdersController < ApplicationController
     end
 
     def get_latest_orders
-      latest_orders = Order.select(:meal, :created_at).last(2)
-      render :json => latest_orders
+      request_body = JSON.parse(request.raw_post)
+      my_orders = Ordermember.where(:member_id => request_body["user_id"]).pluck(:order_id)
+      my_latest_orders = Order.where(:id=> my_orders).last(2)
+      render :json => my_latest_orders
     end
 
 end

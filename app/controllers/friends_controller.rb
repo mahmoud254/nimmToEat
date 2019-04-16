@@ -46,9 +46,13 @@ class FriendsController < ApplicationController
   def get_friends_activity
     request_body = JSON.parse(request.raw_post)
     order_creators = Order.pluck(:creator_id)
-    activity_friends = Friendship.where(user_id: request_body["user_id"]).where(friend_id: order_creators).last(2)
-    # friends = Friendship.where(user_id: request_body["user_id"])
-    render :json => activity_friends
+    activity_friends = Friendship.where(user_id: request_body["user_id"]).where(friend_id: order_creators).pluck(:friend_id)
+    orders = Order.where(:creator_id => activity_friends).limit(2)
+    activity = Array.new
+    orders.each do |o|
+      activity << o.as_json.merge({ "creator_name": User.where(:id => o.creator_id).first().name})
+    end
+    render :json => activity
   end
 
 end

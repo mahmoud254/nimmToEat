@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   #################### new commits for order page####################
   #
-  get "/orders/latest", to: 'orders#get_latest_orders'
+  post "/orders/latest", to: 'orders#get_latest_orders' #takes {"user_id":2}
   #get order details
   get "/orders/:id", to: 'orders#get_order_details' 
   get "/orders/:id/getimage" , to: 'orders#get_order_image'
