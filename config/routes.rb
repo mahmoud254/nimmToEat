@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   post "/groups/members/:id/delete",to:'groups#delete_members'
 
   post "/orders", to:'orders#add_order'
-  post "/users/:id/getfriend" ,to:'orders#get_friends'
-  post "/users/:id/getmembers",to:'orders#get_members'
+  post "/orders/:id/getfriend" ,to:'orders#get_friends'
+  post "/orders/:id/getmembers",to:'orders#get_members'
 
   post "/orders/show",to:'orders#show_orders'
 

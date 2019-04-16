@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
         @member_status=Ordermember.group(["order_id","invitation_status"]).count('invitation_status')
         
         @order_invited =nil
-        @order_joined =nil
+        @order_joined ="-"
         @creator_status =nil
          #@orderDe=Order.joins(:ordermember).select("orders.id,meal,restaurant_name,status,invitation_status")#.group("order_id","invitation_status").where('orders.id = order_id').count('invitation_status')
         # render :json =>@member_status
