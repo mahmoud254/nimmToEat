@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   get "/orders/:id/getimage" , to: 'orders#get_order_image'
   post "/orders/:id/add_item", to: 'orders#add_order_item' #takes {"user_id":2}
 
+  get "/orders/:id/deleteItem", to: 'orders#delete_order_item'
+  get "/orders/:order_id/removeMember/:member_id", to: 'orders#delete_user_orderitems'
+
 
 end
 
