@@ -22,8 +22,12 @@ Rails.application.routes.draw do
   post "/orders/:id/getfriend" ,to:'orders#get_friends'
   post "/orders/:id/getmembers",to:'orders#get_members'
 
-  post "/orders/show", to: 'orders#show_orders'
+  post "/orders/show",to:'orders#show_orders'
+  get "/orders/:id/finish",to:'orders#finish_orders'
+  get "/orders/:id/cancel",to:'orders#cancel_orders'
+  
 
+ 
 
   #################### new commits for order page####################
   #

@@ -72,7 +72,6 @@ class OrdersController < ApplicationController
   end
 
   def show_orders
-
     request_body = JSON.parse(request.raw_post)
     @order_details = []
     @orders = Order.select("id,meal,restaurant_name,status,creator_id")
@@ -88,6 +87,32 @@ class OrdersController < ApplicationController
         @creator_status = true
       else
         @creator_status = false
+
+       def finish_orders
+
+
+            if Order.where('id =?',params[:id]).update(:status=>"finished")
+                render :json => {message:"done"}
+            end
+
+        end
+
+        def cancel_orders
+
+            @delete_record =Order.where("id =? ",params[:id])
+            if @delete_record[0].destroy
+                render :json =>  {:message => "done"}
+                else
+                    return nil
+            end
+        end
+
+    def get_order_details
+      @ordermembers = Ordermember.where("order_id = ?",params[:id]).select(:id,:member_id,:invitation_status, :item, :amount, :price, :comment)
+      @orderdetails = Array.new
+      @ordermembers.each do |od|
+        @name_u=User.where(:id => od.member_id).select(:name)[0]
+        @orderdetails << {:id=>od["id"],:name=>@name_u["name"],:member_id=>od["member_id"],:invitation_status=>od["invitation_status"],:item=>od["item"],:amount=>od["amount"],:price=>od["price"],:comment=>od["comment"]}
       end
 
       @member_status.each do |key, value|
