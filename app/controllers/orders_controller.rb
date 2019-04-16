@@ -116,7 +116,7 @@ class OrdersController < ApplicationController
       @ordermembers = Ordermember.where("order_id = ?",params[:id]).select(:member_id, :item, :amount, :price, :comment)
       @orderdetails = Array.new
       @ordermembers.each do |od|
-        @orderdetails << [ User.where(:id => od.member_id).select(:name), @ordermembers ]
+        @orderdetails << od.as_json.merge({ "name": User.where(:id => od.member_id).first().name})
       end
       render :json => @orderdetails
     end
@@ -164,8 +164,10 @@ class OrdersController < ApplicationController
     end
 
     def get_latest_orders
-      latest_orders = Order.select(:meal, :created_at).last(2)
-      render :json => latest_orders
+      request_body = JSON.parse(request.raw_post)
+      my_orders = Ordermember.where(:member_id => request_body["user_id"]).pluck(:order_id)
+      my_latest_orders = Order.where(:id=> my_orders).last(2)
+      render :json => my_latest_orders
     end
 
 end
