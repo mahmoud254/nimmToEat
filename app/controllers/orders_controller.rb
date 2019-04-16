@@ -113,48 +113,25 @@ class OrdersController < ApplicationController
 
 
     def get_order_details
-      @ordermembers = Ordermember.where("order_id = ?",params[:id]).select(:member_id, :item, :amount, :price, :comment)
+      @ordermembers = Ordermember.where("order_id = ?",params[:id]).select(:id,:member_id,:invitation_status, :item, :amount, :price, :comment)
       @orderdetails = Array.new
       @ordermembers.each do |od|
-        @orderdetails << [ User.where(:id => od.member_id).select(:name), @ordermembers ]
+        @name_u=User.where(:id => od.member_id).select(:name)[0]
+        @orderdetails << {:id=>od["id"],:name=>@name_u["name"],:member_id=>od["member_id"],:invitation_status=>od["invitation_status"],:item=>od["item"],:amount=>od["amount"],:price=>od["price"],:comment=>od["comment"]}
       end
       render :json => @orderdetails
     end
 
-
-    def invited_friends
-      request_body = JSON.parse(request.raw_post)
-      @invited_members  = Ordermember.where("order_id = ?",params[:id]).pluck(:member_id)
-      @invited_friends = Friendship.where(user_id: request_body["user_id"]).where(friend_id: @invited_members)
+    def get_order_image
+      @image = Order.where("id = ?",params[:id]).select(:menu_image)[0]
+      render :json => {:menu_image=>@image["menu_image"]}
     end
 
-    def get_invited_friends
-      render :json => invited_friends
-    end
-
-    def get_invited_friends_count
-      render :json => invited_friends.count
-    end
-
-
-    def joined_friends
-      request_body = JSON.parse(request.raw_post)
-      @invited_members  = Ordermember.where("order_id = ?",params[:id]).where(invitation_status:"accepted").pluck(:member_id)
-      @invited_friends = Friendship.where(user_id: request_body["user_id"]).where(friend_id: @invited_members)
-    end
-
-    def get_joined_friends
-      render :json => joined_friends
-    end
-
-    def get_joined_friends_count
-      render :json => joined_friends.count
-    end
 
     def add_order_item
       request_body = JSON.parse(request.raw_post)
       new_order_member_item = Ordermember.new(:order_id => params[:id],:member_id =>request_body["member_id"],
-                            :invitation_status=>"accepted",:item =>request_body["item"],:amount=>request_body["amount"],:price=>request_body["price"],:comment=>request_body["comment"].to_i)
+                            :invitation_status=>"accepted",:item =>request_body["item"],:amount=>request_body["amount"],:price=>request_body["price"],:comment=>request_body["comment"])
       if new_order_member_item.save
         render :json =>{:message => "done" }
       else

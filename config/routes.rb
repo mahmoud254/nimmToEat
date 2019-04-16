@@ -29,16 +29,8 @@ Rails.application.routes.draw do
   #
   get "/orders/latest", to: 'orders#get_latest_orders'
   #get order details
-  get "/orders/:id", to: 'orders#get_order_details'
-
-  post "/orders/:id/invitedfriends", to: 'orders#get_invited_friends' #takes {"user_id":2}
-  post "/orders/:id/invitedfriendscount", to: 'orders#get_invited_friends_count' #takes {"user_id":2}
-
-
-  post "/orders/:id/joinedfriends", to: 'orders#get_joined_friends' #takes {"user_id":2}
-  post "/orders/:id/joinedfriendscount", to: 'orders#get_joined_friends_count' #takes {"user_id":2}
-
-
+  get "/orders/:id", to: 'orders#get_order_details' 
+  get "/orders/:id/getimage" , to: 'orders#get_order_image'
   post "/orders/:id/add_item", to: 'orders#add_order_item' #takes {"user_id":2}
 
 
