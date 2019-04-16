@@ -50,7 +50,7 @@ class FriendsController < ApplicationController
     orders = Order.where(:creator_id => activity_friends).limit(2)
     activity = Array.new
     orders.each do |o|
-      activity << [ User.where(:id => o.creator_id).select(:name), o ]
+      activity << o.as_json.merge({ "creator_name": User.where(:id => o.creator_id).first().name})
     end
     render :json => activity
   end
