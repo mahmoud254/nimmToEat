@@ -114,5 +114,24 @@ class OrdersController < ApplicationController
        
        end
 
+       def finish_orders
+
+
+            if Order.where('id =?',params[:id]).update(:status=>"finished")
+                render :json => {message:"done"}
+            end
+
+        end
+
+        def cancel_orders
+            
+            @delete_record =Order.where("id =? ",params[:id])
+            if @delete_record[0].destroy
+                render :json =>  {:message => "done"}
+                else        
+                    return nil 
+            end
+        end
+
 
 end
