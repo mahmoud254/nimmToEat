@@ -84,7 +84,7 @@ class OrdersController < ApplicationController
          #@orderDe=Order.joins(:ordermember).select("orders.id,meal,restaurant_name,status,invitation_status")#.group("order_id","invitation_status").where('orders.id = order_id').count('invitation_status')
         # render :json =>@member_status
           @orders.each do |t|
-            @check = Ordermember.where("order_id = ? AND member_id = ?",request_body["user_id"].to_i, t["id"])
+            @check = Ordermember.where("member_id = ? AND  order_id = ?",request_body["user_id"].to_i, t["id"])
             @append=false
             if @check.present?
               @append=true
